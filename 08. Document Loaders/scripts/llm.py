@@ -10,6 +10,7 @@ from langchain_core.output_parsers import StrOutputParser
 langfuse_handler = CallbackHandler()
 base_url = "http://localhost:11434"
 # model = 'qwen3'
+# model = 'llama3.1:8b'
 model = 'llama3.2'
 
 llm = ChatOllama(base_url=base_url, model=model)

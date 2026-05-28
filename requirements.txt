@@ -46,4 +46,5 @@ streamlit>=1.50.0
 # Utilities
 ipywidgets>=8.1.7
 jupyter>=1.1.1
-unstructured>=0.22.31
+unstructured
+unstructured[all-docs]
