@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from pydantic import BaseModel, Field
 load_dotenv()  # Load environment variables from .env file
 
 from langchain_core.tools import tool
@@ -6,7 +7,15 @@ from langchain_core.tools import tool
 # DuckDuckGo search integration
 from ddgs import DDGS
 
-@tool
+class WebSearchInput(BaseModel):
+    query: str = Field(description="Search query")
+    num_results: int = Field(
+        default=10,
+        description="Number of search results to return"
+    )
+
+
+@tool(args_schema=WebSearchInput)
 def web_search(query: str, num_results: int = 10) -> str:
     """Search the web using DuckDuckGo.
     
@@ -36,8 +45,5 @@ def web_search(query: str, num_results: int = 10) -> str:
             formatted_results.append(f"{i}. **{title}**\n   {body}\n   {href}")
         
         return "\n\n".join(formatted_results)
-    
     except Exception as e:
         return f"Search error: {str(e)}"
-
-
