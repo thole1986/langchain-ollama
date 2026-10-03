@@ -25,7 +25,7 @@ st.title("Make Your Own Chatbot")
 st.write("Chat with me! Catch me at https://youtube.com/kgptalkie")
 
 base_url = "http://localhost:11434"
-model = 'qwen3'
+model = 'qwen3.5:latest'
 
 user_id = st.text_input("Enter your user id", "laxmikant")
 
@@ -47,7 +47,8 @@ for message in st.session_state.chat_history:
 
 
 ### LLM Setup
-llm = ChatOllama(base_url=base_url, model=model)
+# llm = ChatOllama(base_url=base_url, model=model)
+llm = ChatOllama(base_url=base_url, model=model, reasoning=False)
 
 system = SystemMessagePromptTemplate.from_template("You are helpful assistant.")
 human = HumanMessagePromptTemplate.from_template("{input}")
